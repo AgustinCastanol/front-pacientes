@@ -14,8 +14,8 @@ const tipoSangre = ref([
   { label: 'AB', value: 'AB' },
 ]);
 
-const props = defineProps(['abrirModalAgregar']);
-console.log(props.abrirModalAgregar);
+const props = defineProps(['modal']);
+console.log(props);
 
 
 const campos = [
@@ -49,8 +49,15 @@ const campos = [
 ];
 const pacientes = ref([]);
 
-
-const pacienteSeleccionado = ref(Object.fromEntries(campos.map((campo) => [campo.field, ''])));
+onMounted(()=>{
+  let data = {}
+  for(let key of campos){
+    data[key.field] = ''
+  }
+  pacientesSeleccionados.value = data;
+  console.log(data)
+})
+const pacienteSeleccionado = ref(null);
 
 
 const mostrarModalAgregar = ref(false);

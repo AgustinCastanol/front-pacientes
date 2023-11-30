@@ -1,6 +1,6 @@
 <script setup>
 import HorizontalMenu from './components/HorizontalMenu.vue';
-import Table from './components/Table.vue'
+import Table from './pages/Table.vue'
 
 
 

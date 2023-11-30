@@ -14,8 +14,8 @@ import Textarea from 'primevue/textarea';
 import axios from 'axios';
 
 
-import inicio from './components/inicio.vue';
-import Table from './components/Table.vue';
+import inicio from './pages/inicio.vue';
+import Table from './pages/Table.vue';
 import TableConsultation from './components/TableConsultation.vue'
 
 const app = createApp(App);
