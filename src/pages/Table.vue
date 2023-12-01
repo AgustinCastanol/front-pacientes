@@ -4,7 +4,7 @@
       <i class="pi pi-search"/>
       <InputText v-model="busqueda" @input="filtarPacientes" placeholder="Keyword Search" @click="searchPatients"/>
     </span>
-    <button @click="Agregar">Agregar Paciente</button>
+    <ModalGenerico :data="config" buttonLabel="Agregar Paciente" @onSuccess="loadPatientes" @onClick="agregar" @onClose="cerrarModalAgregar"/>
     <DataTable :value="pacientes" :paginator="true" :rows="5" :emptyMessage="emptyMessage" class="table">
       <Column field="name" header="Nombre"></Column>
       <Column field="last_name" header="Apellido"></Column>
@@ -26,9 +26,6 @@
       </Column>
     </DataTable>
   </div>
-  <!--Modal Agregar Paciente-->
-  <AgregarPaciente v-if="modalAgregarPacientes" :modal="modalAgregarPacientes"/>
-  <!-- Modal Modificar Paciente -->
   <div>
     <Dialog v-model="mostrarModalModificar" header="Modificar Paciente" :visible="mostrarModalModificar"
             class="p-dialog">
@@ -288,6 +285,7 @@ import {createRouter, createWebHistory} from 'vue-router';
 import {useRouter} from 'vue-router';
 import AgregarPaciente from '../components/generics/AgregarPaciente.vue'
 import jsPDF from 'jspdf';
+import ModalGenerico from "../components/generics/ModalGenerico.vue";
 
 const pacientes = ref([]);
 const consultas = ref([]);
@@ -316,10 +314,31 @@ const modalAgregarPacientes = ref(false);
 * utilizar este modal de ejemplo y llamar a los datos de la siguiente forma =>
 * store.value.["pacientes"]
 * */
-const Agregar = () => {
+const agregar = () => {
   modalAgregarPacientes.value = !modalAgregarPacientes.value;
 }
-
+const data = ref({
+  visible: false,
+  header: 'Header',
+  onClick: agregar,
+  onClose: () => {},
+  breakpoints: {
+    '960px': '75vw',
+    '640px': '100vw'
+  },
+  customHeader: false,
+  layoutHeader: 'dialog-header',
+  buttonLabel: 'Agregar Paciente',
+  customFooter: false,
+  layoutFooter: 'dialog-footer',
+  style: {},
+  modal: true,
+  data:[{
+    field: 'field',
+    value: 'value',
+    type:'text'
+  }]
+})
 
 const abrirModal = () => {
   abrirModalAgregar.value = true;

@@ -15,8 +15,8 @@ const tipoSangre = ref([
 ]);
 
 const props = defineProps(['modal']);
+const modal = ref(props.modal||false);
 console.log(props);
-
 
 const campos = [
   { label: 'Nombre:', field: 'name', type: 'text' },
@@ -49,16 +49,7 @@ const campos = [
 ];
 const pacientes = ref([]);
 
-onMounted(()=>{
-  let data = {}
-  for(let key of campos){
-    data[key.field] = ''
-  }
-  pacientesSeleccionados.value = data;
-  console.log(data)
-})
 const pacienteSeleccionado = ref(null);
-
 
 const mostrarModalAgregar = ref(false);
 
@@ -150,7 +141,7 @@ const sexo = ref([
 </script>
 <template>
   <div class="container-dialog">
-    <Dialog v-model="abrirModalAgregar" header="Agregar Paciente" class="p-dialog">
+    <Dialog v-model="modal" header="Agregar Paciente" class="p-dialog">
       <div class="row">
         <div class="column">
          
